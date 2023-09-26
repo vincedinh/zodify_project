@@ -1,0 +1,16 @@
+.NavigationBar {
+  display: block;
+  width: 100%;
+  background: black;
+  opacity: 0.75;
+  color: white;
+  
+  /* fix the navbar to the top */
+  position: fixed;
+  top: 0;
+}
+
+li {
+  display: inline-block;
+  margin-right: 10px;
+}
