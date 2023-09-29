@@ -1,31 +1,22 @@
-import React, { useContext, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { FirebaseContext } from "../../context/FirebaseContext";
 import './SignUp.css';
+import * as ROUTES from '../../constants/routes';
+import { useAuth } from "../../context/AuthContext"
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { firebase } = useContext(FirebaseContext);
+  const auth = useAuth();
+  let nav = useNavigate();
 
   return (
     <div className='container'>
       <form onSubmit={(event) => {
         event.preventDefault(); /** Prevent refresh of page */
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => 
-            {
-              const user = userCredential.user;
-            })
-          .catch((error) => 
-            {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              alert(errorCode + ": " + errorMessage);
-            });
+        auth.signup({email, password, callback: () => {nav(ROUTES.LOGIN)}})
         setEmail('');
         setPassword('');
       }}

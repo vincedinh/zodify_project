@@ -1,7 +1,10 @@
 import React from "react";
 import "./Hero.css";
 
+import { useAuth } from '../../context/AuthContext';
+
 const Hero = () => {
+  console.log()
   return (
     <div className="Hero">
         <h1>Zodify</h1>

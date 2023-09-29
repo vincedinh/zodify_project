@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { FirebaseContext } from './context/FirebaseContext';
 import { firebase } from './firebase/config';
+import { ProvideAuth } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <FirebaseContext.Provider value={{firebase}}>
-      <App />
+      <ProvideAuth>
+        <App />
+      </ProvideAuth>
     </FirebaseContext.Provider>
   </React.StrictMode>
 );
