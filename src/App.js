@@ -13,9 +13,14 @@ import NavigationBar from './components/NavigationBar/index.js';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/privateRoute';
+import { useAuth } from './context/AuthContext';
 
 function App() {
-  return (
+  const {isLoading} = useAuth();
+
+  return isLoading ? (
+    <h1>Loading data...</h1>
+  ): (
     <Router>
       <NavigationBar/>
       <Routes>
