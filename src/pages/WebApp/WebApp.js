@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
+import SpotifyGetTopArtists from "./components/spotifyGetTop/SpotifyGetTopArtists";
+import * as SPOTIFY from "../../constants/spotify"
 // import { Navigate } from 'react-router-dom';
 
 // import { useAuth } from "../../context/AuthContext";
 // import * as ROUTES from '../../constants/routes';
 
-const CLIENT_ID = "***REMOVED***"
+const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
 const SCOPES = ["user-top-read"];
 
@@ -59,6 +61,7 @@ const WebApp = () =>
     <div className='container'>
       <h1>Hello, {auth.user.email}!</h1>
       <button onClick={handleLogin}>Login to Spotify</button>
+      <SpotifyGetTopArtists/>
     </div>
   )
 }
