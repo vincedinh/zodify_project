@@ -26,7 +26,7 @@ yarn-error.log*
 /src/firebase
 
 # packages
-.package-lock.json
+package-lock.json
 
 # api
 /src/constants/spotify.js
