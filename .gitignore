@@ -23,7 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 replace.txt
-postgresCreds.txt
 
 # firebase
 /src/firebase
