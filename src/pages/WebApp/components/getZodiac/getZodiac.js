@@ -2,6 +2,7 @@ import React,
 {
   useState,
   useEffect,
+  useRef,
 }
 from 'react';
 import useFetch from '../../../../utils/hooks';
@@ -19,8 +20,6 @@ function getKeyWithMaxValue(data) {
   let maxValue = -1;
 
   for (const [key, value] of Object.entries(data)) {
-    // console.log(key)
-    // console.log(value)
     if (value > maxValue) {
       maxKey = key;
       maxValue = value;
@@ -34,22 +33,15 @@ function getKeyWithMaxValue(data) {
  * 
  * @param {*} zodiacGenreMap map of zodiac, genreList pairings
  * @param {*} genreValuePair current genre we are evaluating, where index 0 = genre name, index 1 = value
- * @param {*} zodiacCountMap points that the current zodiac has -- this is what we increment
- * @returns increments points in zodiacCountMap for each zodiac that has genreValuePair[0] in its list
+ * @returns increments points for each zodiac that has genreValuePair[0] in its list
  */
-function compareZodiac(zodiacGenreMap, genreValuePair, zodiacCountMap) {
-  return Object.entries(zodiacGenreMap).map(([animalid, genres], idx) => {
+function compareZodiac(zodiacGenreMap, genreValuePair) {
+  return Object.entries(zodiacGenreMap).map(([animalid, genres]) => {
     // 
     const count = genres.filter((g) => g === genreValuePair[0]).length;
+    const points = count * genreValuePair[1]
 
-    // Increment the count
-    zodiacCountMap[animalid] = (zodiacCountMap[animalid] || 0) + count*genreValuePair[1]; 
-    return (
-      <div key={idx}>
-        {`${animalid}: `}
-        <p>Count: {count}</p>
-      </div>
-    );
+    return {animalid, points}
   });
 }
 
@@ -87,8 +79,21 @@ function DisplayZodiacCounts({ zodiacCountMap }) {
  */
 const GetZodiac = () => {
   // fetches list of zodiacs and associated genres
-  const { data, handleGetTopArtists, token, setToken } = useSpotifyData();
+  const { data, handleGetTopArtists, token, setToken, loading } = useSpotifyData();
 
+  // Use a ref to track whether the effect has run (prevent constant re-renders)
+  const hasInitialRenderRun = useRef(false);
+
+  // Effect to set the token and call handleGetTopArtists on initial render
+  // I don't know why it keeps re-rendering with the token as a dependency when the token doesn't change after logging in..
+  useEffect(() => {
+    if (!hasInitialRenderRun.current && token) {
+      hasInitialRenderRun.current = true;
+      handleGetTopArtists();
+    }
+  }, [token, handleGetTopArtists]);
+
+  // Fetch zodiac relations
   const [zodiacData] = useFetch(
     'http://localhost:9000/api/getList'
   );
@@ -99,33 +104,54 @@ const GetZodiac = () => {
     return acc;
   }, {});
 
-  // Type is plain object
-  let zodiacCountMap = zodiacData.reduce((acc, item) => {
-    acc[item.animalid] = 0;
-    return acc;
-  }, {});
+  // State to update the countMap once the user generates a zodiac
+  const [zodiacCountMap, setZodiacCountMap] = useState(() => {
+    const initialCountMap = zodiacData.reduce((acc, item) => {
+      acc[item.animalid] = 0;
+      return acc;
+    }, {});
+    return initialCountMap;
+  });
+
+  const [processingDone, setProcessingDone] = useState(false);
+
+  let generatedZodiac = null;
+
+  // Process genres. If genres have already been processed, do not increment count map further.
+  const processGenres = () => {
+    if (data?.topGenres instanceof Map && !processingDone) {
+      const results = [...data.topGenres.entries()].map(([genre, value], index) => {
+        return compareZodiac(zodiacGenreMap, [genre, value], zodiacCountMap);
+      });
+      results.forEach((zodiacResults) => {
+        zodiacResults.forEach(({ animalid, points }) => {
+          setZodiacCountMap((prevZodiacCountMap) => ({
+            ...prevZodiacCountMap,
+            [animalid]: (prevZodiacCountMap[animalid] || 0) + points,
+          }));
+        })
+      })
+      // console.log(zodiacCountMap);
+      setProcessingDone(true);
+    }
+  };
+
+  // Generate zodiac if genres have been processed
+  if (processingDone) {
+    generatedZodiac = (
+      <h1>Your music's zodiac animal is: {getKeyWithMaxValue(zodiacCountMap)}</h1>
+    );
+  }
+
+  function handleProcessGenres() {
+    processGenres();
+  }
 
   return (
     <div>
       <DisplayZodiacCounts zodiacCountMap={zodiacCountMap}/>
-      <button onClick={handleGetTopArtists}>Get Top Artists</button>
-      {
-        data?.topGenres instanceof Map ? (
-          // Convert iterable entries from data.topGenres map into array of key-value pairs (tuples)
-          [...data.topGenres.entries()].map(([genre, value], index) => (
-            <div key={index}>
-              <h1>{genre}: {value} points</h1>
-              {compareZodiac(zodiacGenreMap, [genre, value], zodiacCountMap)}
-            </div>
-          ))
-        ) : (
-          // All the genres that the user listens to are either not stored yet in the zodiac database
-          // or there is a problem retrieving the data.
-          <p>Sorry, not enough data or could not retrieve Spotify or zodiac data.</p>
-          // console.error("Error: could not retrieve Spotify data or zodiac data.")
-        )
-      }
-      <h1>Your music's zodiac animal is: {getKeyWithMaxValue(zodiacCountMap)}</h1>
+      <button onClick={handleProcessGenres}>Analyze Your Music!</button>
+      {generatedZodiac}
     </div>
   );
 };

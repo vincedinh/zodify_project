@@ -27,8 +27,7 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
   return paramsSplitUp;
 }
 
-const WebApp = () => 
-{
+const WebApp = () => {
   useEffect(() => {
     if(window.location.hash) {
       const {

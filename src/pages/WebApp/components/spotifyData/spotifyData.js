@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const SPOTIFY_ENDPOINT = 'https://api.spotify.com/v1/me/top/artists'
@@ -10,8 +10,10 @@ const useSpotifyData = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const handleGetTopArtists = () => {
+  const handleGetTopArtists = async () => {
     setLoading(true);
+
+
     // Delay the API call by 400ms
     setTimeout(() => {
       axios({
@@ -26,13 +28,8 @@ const useSpotifyData = () => {
         },
       })
         .then(async (res) => {
-          // Access response headers, including the Spotify retry header
-          const retryHeader = res.headers['retry-after'];
-          console.log(retryHeader);
-
           // Handle the response with the top artists for the short-term period.
-          // Currently all genre weights are equal
-          /** TO DO:
+          /**
            * give weights to the artists' genres based on their positions
            * set a WEIGHT_MAX for artist, based on their position on the list (WEIGHT_MAX = (list.length - index)/list.length))
            * For each of the artist's genres, distribute the WEIGHT_MAX amongst the genres
@@ -42,7 +39,6 @@ const useSpotifyData = () => {
            * Increment the genre's weight by this weight
            */
           const topArtists = res.data.items;
-          // const topGenresSet = new Set();
           const topGenresWeights = new Map();
 
           for (let i = 0; i < topArtists.length; i++) {
@@ -51,9 +47,7 @@ const useSpotifyData = () => {
             // List of strings
             const artistGenres = topArtists[i].genres;
 
-
             const WEIGHT_MAX = (topArtists.length - i)/topArtists.length
-            console.log(artistName, artistGenres, WEIGHT_MAX)
 
             for (let j = 0; j < artistGenres.length; j++) {
               const artistGenreWeight = ((artistGenres.length - j) / artistGenres.length)*WEIGHT_MAX
@@ -66,20 +60,8 @@ const useSpotifyData = () => {
             }
           }
 
-          console.log(topGenresWeights);
-
-          // topArtists.forEach((artist) => {
-          //   const artistName = artist.name;
-          //   const artistGenres = artist.genres;
-
-          //   artistGenres.forEach((genre) => {
-          //     topGenresSet.add(genre);
-          //   });
-          // });
           let topGenres = topGenresWeights;
           setData({ topArtists, topGenres });
-
-
         })
         .catch((error) => {
           // const retryHeader = error.response.headers['retry-after'];
@@ -98,10 +80,9 @@ const useSpotifyData = () => {
     if (localStorage.getItem('accessToken')) {
       setToken(localStorage.getItem('accessToken'));
     }
-
   }, []);
 
-  return {data, handleGetTopArtists, token, setToken};
+  return {data, handleGetTopArtists, token, setToken, loading};
 };
 
 export default (useSpotifyData);
