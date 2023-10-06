@@ -17,8 +17,11 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+
   "scripts": {
+    "app": "npm run backend-start && npm start && npm run express-start",
     "backend-start": "cd backend && node dbseed.js",
+    "express-start": "cd backend/api && npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

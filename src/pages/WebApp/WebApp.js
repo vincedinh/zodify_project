@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
-import SpotifyGetTopArtists from "./components/spotifyGetTop/SpotifyGetTopArtists";
-import * as SPOTIFY from "../../constants/spotify"
-// import { Navigate } from 'react-router-dom';
 
-// import { useAuth } from "../../context/AuthContext";
-// import * as ROUTES from '../../constants/routes';
+import './WebApp.css';
+import { useAuth } from "../../context/AuthContext";
+import useSpotifyData from "./components/spotifyData/index.js";
+import * as SPOTIFY from "../../constants/spotify";
+import GetZodiac from "./components/getZodiac/index.js";
+
 
 const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
@@ -58,10 +58,10 @@ const WebApp = () =>
   };
 
   return (
-    <div className='container'>
+    <div className='displayApp'>
       <h1>Hello, {auth.user.email}!</h1>
       <button onClick={handleLogin}>Login to Spotify</button>
-      <SpotifyGetTopArtists/>
+      <GetZodiac/>
     </div>
   )
 }
