@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Hero.css";
 
-import { useAuth } from "../../context/AuthContext";
+// import { useAuth } from "../../context/AuthContext";
 import * as SPOTIFY from "../../constants/spotify";
 
 const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
@@ -37,18 +37,18 @@ const Hero = () => {
       localStorage.setItem('accessToken', access_token);
       localStorage.setItem('tokenType', token_type);
       localStorage.setItem('expiresIn', expires_in);
-      console.log('accssToken')
+      console.log(localStorage.getItem('accessToken'))
     }
   }, [])
 
-  const auth = useAuth();
+  // const auth = useAuth();
 
   var url = 'https://accounts.spotify.com/authorize';
   url += '?response_type=token';
   url += '&client_id=' + encodeURIComponent(CLIENT_ID);
   url += '&scope=' + encodeURIComponent(SCOPES);
   url += '&redirect_uri=' + encodeURIComponent(REDIRECT_URL_AFTER_LOGIN);
-  url += '&state=' + encodeURIComponent(auth.user);
+  // url += '&state=' + encodeURIComponent(auth.user);
 
   const handleLogin = () => {
     console.log(localStorage.getItem('accessToken'))

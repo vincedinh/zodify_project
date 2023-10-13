@@ -16,6 +16,7 @@ import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/privateRoute';
 import { useAuth } from './context/AuthContext';
+import Footer from './components/Footer';
 
 function App() {
   // const {isLoading} = useAuth();
@@ -35,6 +36,7 @@ function App() {
         <Route path={ROUTES.HOME} element={<Hero/>}/>
         {/* <Route path={ROUTES.PROFILE} element={<h1>Welcome!</h1>}/>       */}
         </Routes>
+        <Footer/>
     </Router>
   );
 };

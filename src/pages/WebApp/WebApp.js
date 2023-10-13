@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-
 import './WebApp.css';
 import useSpotifyData from "./components/spotifyData/spotifyData";
 import GetZodiac from "./components/getZodiac/index.js";
@@ -59,7 +58,9 @@ const WebApp = () => {
       <GetZodiac/>
     </div>
   ) : (
-    <h1 className='displayApp'>Loading user data...</h1>
+    <div>
+      <h1 className='displayApp'>Loading user data...</h1>
+    </div>
   )
 }
 

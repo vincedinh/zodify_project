@@ -5,10 +5,9 @@ import React,
   useRef,
 }
 from 'react';
-import useFetch from '../../../../utils/hooks';
-
-import useSpotifyData from "../spotifyData/index.js";
-
+import useFetch from '../../../../utils/hooks'
+import useSpotifyData from '../spotifyData/index.js';
+import { ZODIAC_IMG } from '../../../../constants/images.js';
 
 /**
  * 
@@ -64,7 +63,7 @@ function compareZodiac(zodiacGenreMap, genreValuePair) {
 
 /**
  * 
- * @param {*} zodiacCountMap map of all the zodiacs and their points
+ * @param {*} zodiacCountMap map of all the zodiacs and their points, used for testing and seeing user's zodiac points
  * @returns jsx display of the map
  */
 function DisplayZodiacCounts({ zodiacCountMap }) {
@@ -199,6 +198,7 @@ const GetZodiac = () => {
     generatedZodiac = (
       <div>
         <h1>Your music's zodiac animal is: {topZodiac}</h1>
+        <img src={ZODIAC_IMG[topZodiac]} alt={topZodiac} />
         <h2>{DisplayTraits(zodiacDscrpMap[topZodiac][0])}</h2>
         <h3>{zodiacDscrpMap[topZodiac][1]}</h3>
         <div>
