@@ -14,7 +14,10 @@ const NavigationBar = () => {
           <Link to={ROUTES.HOME}>
             <li>Home</li>
           </Link>
-          { auth.user ? (
+          <Link to={ROUTES.WEB_APP}>
+              <li>App</li>
+            </Link>
+          {/* { auth.user ? (
             <>
             <Link to={ROUTES.WEB_APP}>
               <li>App</li>
@@ -34,7 +37,7 @@ const NavigationBar = () => {
                 </Link>
               </>
             )
-          }
+          } */}
         </ul>
       </nav>
     </header>

@@ -15,18 +15,35 @@ import useSpotifyData from "../spotifyData/index.js";
  * @param {*} data plain JS object passed in
  * @returns gets the key of the highest value in the object
  */
-function getKeyWithMaxValue(data) {
+function getZodiacWithMaxValue(data) {
   let maxKey = null;
   let maxValue = -1;
 
-  for (const [key, value] of Object.entries(data)) {
-    if (value > maxValue) {
-      maxKey = key;
-      maxValue = value;
+  if (data instanceof Map) {
+    // Handle Map objects
+    for (const [key, value] of data) {
+      if (value > maxValue) {
+        maxKey = key;
+        maxValue = value;
+      }
+    }
+  } else if (typeof data === 'object') {
+    // Handle plain JavaScript objects
+    for (const key in data) {
+      if (data.hasOwnProperty(key) && data[key] > maxValue) {
+        maxKey = key;
+        maxValue = data[key];
+      }
     }
   }
 
-  return maxKey;
+  // There is a matching Zodiac present, else return the user "Unicorn" status
+  if (maxValue !== 0) {
+    return maxKey;
+  } else {
+    return "Unicorn";
+  }
+  
 }
 
 /**
@@ -72,20 +89,18 @@ function DisplayZodiacCounts({ zodiacCountMap }) {
   }
 }
 
-
 /**
  * Main function
  * @returns displays user zodiac based off of genres listened to
  */
 const GetZodiac = () => {
   // fetches list of zodiacs and associated genres
-  const { data, handleGetTopArtists, token, setToken, loading } = useSpotifyData();
+  const { data, handleGetTopArtists, token } = useSpotifyData();
 
   // Use a ref to track whether the effect has run (prevent constant re-renders)
   const hasInitialRenderRun = useRef(false);
 
   // Effect to set the token and call handleGetTopArtists on initial render
-  // I don't know why it keeps re-rendering with the token as a dependency when the token doesn't change after logging in..
   useEffect(() => {
     if (!hasInitialRenderRun.current && token) {
       hasInitialRenderRun.current = true;
@@ -94,7 +109,8 @@ const GetZodiac = () => {
   }, [token, handleGetTopArtists]);
 
   // Fetch zodiac relations
-  const [zodiacData] = useFetch(
+  // Fix: Currently runs with every render, find way to only run on initial render
+  let [zodiacData] = useFetch(
     'http://localhost:9000/api/getList'
   );
 
@@ -138,10 +154,39 @@ const GetZodiac = () => {
 
   // Generate zodiac if genres have been processed
   if (processingDone) {
+      // Convert the Map to an array of key-value pairs
+    // Sort the array in descending order based on values
+    // Extract and print the keys in descending order
+    const genresArray = [...(data.topGenres || new Map()).entries()];
+    genresArray.sort((a, b) => b[1] - a[1]);
+    const keysInDescendingOrder = genresArray.map(([genre, value]) => genre);
+  
+    function listGenres(genres) {
+      if (genres) {
+        return (
+          <ul>
+            {genres.map((genre, index) => (
+              <li key={index}>{genre}</li>
+            ))}
+          </ul>
+        );
+      }
+      return null;
+    }
+  
     generatedZodiac = (
-      <h1>Your music's zodiac animal is: {getKeyWithMaxValue(zodiacCountMap)}</h1>
+      <div>
+        <h1>Your music's zodiac animal is: {getZodiacWithMaxValue(zodiacCountMap)}</h1>
+        <div>
+          Your top genres this month:
+        </div>
+        <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black'}}>
+          {listGenres(keysInDescendingOrder)}
+        </div>
+      </div>
     );
   }
+  
 
   function handleProcessGenres() {
     processGenres();

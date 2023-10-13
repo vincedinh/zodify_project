@@ -1,3 +1,5 @@
+/** FIREBASE AUTH DISABLED FOR NOW */
+
 import React, { 
   useState, 
   useEffect, 

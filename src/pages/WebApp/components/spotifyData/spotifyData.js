@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const SPOTIFY_ENDPOINT = 'https://api.spotify.com/v1/me/top/artists'
+const SPOTIFY_ENDPOINT_TOP = 'https://api.spotify.com/v1/me/top/artists'
+const SPOTIFY_ENDPOINT_USER = 'https://api.spotify.com/v1/me'
+
 
 
 const useSpotifyData = () => {
   // State variables to store Spotify data
   const [token, setToken] = useState("");
   const [data, setData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const handleGetTopArtists = async () => {
     setLoading(true);
-
 
     // Delay the API call by 400ms
     setTimeout(() => {
       axios({
         method: 'get',
-        url: SPOTIFY_ENDPOINT,
+        url: SPOTIFY_ENDPOINT_TOP,
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -75,14 +77,44 @@ const useSpotifyData = () => {
     }, 400);
   };
 
+  // Gets user's display name
+  const handleGetUser = async () => {
+    setLoading(true);
+
+    // Delay the API call by 400ms
+    setTimeout(() => {
+      axios({
+        method: 'get',
+        url: SPOTIFY_ENDPOINT_USER,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+        .then(async (res) => {
+          const userDetails = res.data;
+          setUserDetails(userDetails);
+        })
+        .catch((error) => {
+          // const retryHeader = error.response.headers['retry-after'];
+          console.error('Error:', error);
+          // console.log(retryHeader)
+        })
+        .finally(() => {
+          // Remove loading state
+          setLoading(false);
+        });
+    }, 400);
+  };
+
   // Runs once with no dependencies (on render)
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       setToken(localStorage.getItem('accessToken'));
+      setLoading(false);
     }
   }, []);
 
-  return {data, handleGetTopArtists, token, setToken, loading};
+  return {data, handleGetTopArtists, handleGetUser, token, setToken, userDetails, setUserDetails, loading};
 };
 
 export default (useSpotifyData);

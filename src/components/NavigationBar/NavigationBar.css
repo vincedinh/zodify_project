@@ -10,7 +10,7 @@
   top: 0;
 }
 
-li {
+.NavigationBar li {
   display: inline-block;
   margin-right: 10px;
   color: white;

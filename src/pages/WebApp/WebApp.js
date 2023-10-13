@@ -1,15 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 import './WebApp.css';
-import { useAuth } from "../../context/AuthContext";
-import useSpotifyData from "./components/spotifyData/index.js";
-import * as SPOTIFY from "../../constants/spotify";
+import useSpotifyData from "./components/spotifyData/spotifyData";
 import GetZodiac from "./components/getZodiac/index.js";
-
-
-const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
-const SCOPES = ["user-top-read"];
 
 const getReturnedParamsFromSpotifyAuth = (hash) => {
 
@@ -28,6 +21,11 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 }
 
 const WebApp = () => {
+
+  // Old firebase login
+  // const auth = useAuth();
+
+  // Store Spotify access token for login session
   useEffect(() => {
     if(window.location.hash) {
       const {
@@ -43,25 +41,25 @@ const WebApp = () => {
     }
   }, [])
 
-  const auth = useAuth();
+  const { handleGetUser, userDetails, token, loading } = useSpotifyData();
 
-  var url = 'https://accounts.spotify.com/authorize';
-  url += '?response_type=token';
-  url += '&client_id=' + encodeURIComponent(CLIENT_ID);
-  url += '&scope=' + encodeURIComponent(SCOPES);
-  url += '&redirect_uri=' + encodeURIComponent(REDIRECT_URL_AFTER_LOGIN);
-  url += '&state=' + encodeURIComponent(auth.user);
+  // Use a ref to track whether the effect has run (prevent constant re-renders)
+  const hasInitialRenderRun = useRef(false);
 
-  const handleLogin = () => {
-    window.location = url;
-  };
+  useEffect(() => {
+    if (!hasInitialRenderRun.current && token) {
+      hasInitialRenderRun.current = true;
+      handleGetUser();
+    }
+  }, [token, handleGetUser])
 
-  return (
+  return !loading ? (
     <div className='displayApp'>
-      <h1>Hello, {auth.user.email}!</h1>
-      <button onClick={handleLogin}>Login to Spotify</button>
+      <h1>Hello, {userDetails.display_name}!</h1>
       <GetZodiac/>
     </div>
+  ) : (
+    <h1 className='displayApp'>Loading user data...</h1>
   )
 }
 
