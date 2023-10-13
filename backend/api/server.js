@@ -17,7 +17,7 @@ app.get('/api/getList', async (req, res) => {
   try {
     const zodiacs = await db.selectZodiacs();
     res.json(zodiacs);
-    console.log(`Connected to database '${process.env.PGDATABASE}'`);
+    // console.log(`Connected to database '${process.env.PGDATABASE}'`);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');

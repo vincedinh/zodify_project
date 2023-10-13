@@ -120,6 +120,12 @@ const GetZodiac = () => {
     return acc;
   }, {});
 
+  // Type is plain object
+  const zodiacDscrpMap = zodiacData.reduce((acc, item) => {
+    acc[item.animalid] = [item.traits, item.dscrp];
+    return acc;
+  }, {});
+
   // State to update the countMap once the user generates a zodiac
   const [zodiacCountMap, setZodiacCountMap] = useState(() => {
     const initialCountMap = zodiacData.reduce((acc, item) => {
@@ -173,10 +179,28 @@ const GetZodiac = () => {
       }
       return null;
     }
+
+    let topZodiac = getZodiacWithMaxValue(zodiacCountMap)
+
+    function DisplayTraits(traits) {
+      // Convert the object to an array of key-value pairs
+      const keyValuePairs = Object.entries(traits);
+
+      // concatenate the pairs with commas
+      const commaSeparatedText = keyValuePairs.map(([idx, value]) => `${value}`).join(', ');
+
+      return (
+        <div>
+          {commaSeparatedText}
+        </div>
+      );
+    }
   
     generatedZodiac = (
       <div>
-        <h1>Your music's zodiac animal is: {getZodiacWithMaxValue(zodiacCountMap)}</h1>
+        <h1>Your music's zodiac animal is: {topZodiac}</h1>
+        <h2>{DisplayTraits(zodiacDscrpMap[topZodiac][0])}</h2>
+        <h3>{zodiacDscrpMap[topZodiac][1]}</h3>
         <div>
           Your top genres this month:
         </div>
@@ -194,9 +218,10 @@ const GetZodiac = () => {
 
   return (
     <div>
-      <DisplayZodiacCounts zodiacCountMap={zodiacCountMap}/>
+      {/* <DisplayZodiacCounts zodiacCountMap={zodiacCountMap}/> */}
       <button onClick={handleProcessGenres}>Analyze Your Music!</button>
       {generatedZodiac}
+      <p>*Disclaimer: these connections are symbolic and meant for creative interpretation rather than a direct astrological association.*</p>
     </div>
   );
 };

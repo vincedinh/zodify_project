@@ -33,16 +33,17 @@ const pool = new Pool({
  
 // connectDb()
 
-// get all zodiacs and associated genres
+// get all zodiacs
 exports.selectZodiacs = async () => {
-  const select = `SELECT animalid, genres FROM zodiac`;
+  const select = `SELECT * FROM zodiac`;
 
   const query = {
     text: select,
     values: [],
   };
+  // console.log(await pool.query(query));
   const {rows} = await pool.query(query);
-  console.log(rows);
+  // console.log(rows);
   // for (const row of rows) {
   //   console.log(`animal: ${row.animalid}, Genre: ${row.genre}`);
   // }
