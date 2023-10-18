@@ -32,9 +32,9 @@ function App() {
       <NavigationBar/>
       <Routes>
         <Route path={ROUTES.HOME} element={<Hero/>}/>
-        <Route path={ROUTES.WEB_APP} element={<PrivateRoute/>}>
-          <Route path={ROUTES.WEB_APP} element={<WebApp/>}/>
-        </Route>
+        {/* <Route path={ROUTES.WEB_APP} element={<PrivateRoute/>}> */}
+        <Route path={ROUTES.WEB_APP} element={<WebApp/>}/>
+        {/* </Route> */}
         <Route path={ROUTES.ABOUT} element={<About/>}/>
         <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy/>}/>
         <Route path={ROUTES.CONTACT} element={<Contact/>}/>

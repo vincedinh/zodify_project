@@ -14,15 +14,6 @@ const NavigationBar = () => {
           <Link to={ROUTES.HOME}>
             <li>Home</li>
           </Link>
-          { /** App tab is only accessible to those logged into Spotify/have a token */
-            localStorage.getItem('accessToken') && Date.now() <= localStorage.getItem('tokenExpiresAt') ? (
-              <Link to={ROUTES.WEB_APP}>
-                <li>App</li>
-              </Link>
-            ) : (
-              <></>
-            )
-          }
           <Link to={ROUTES.ABOUT}>
             <li>About</li>
           </Link>

@@ -5,7 +5,7 @@ import "./Hero.css";
 import * as SPOTIFY from "../../constants/spotify";
 
 const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/"
+const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
 const SCOPES = ["user-read-private", "user-read-email", "user-top-read"];
 
 const getReturnedParamsFromSpotifyAuth = (hash) => {
@@ -65,7 +65,7 @@ const Hero = () => {
         <h1>Zodify</h1>
         <p>Find your music's spirit animal.</p>
         <button onClick={handleLogin}>Spotify Login</button>
-        <p>Once logged in, click on the "App" tab to access the Zodify web app.</p>
+        <p style={{fontStyle: 'italic'}}>*Click the login button to access the app.*</p>
     </div>
   )
 }
