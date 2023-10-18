@@ -37,6 +37,11 @@ const WebApp = () => {
       localStorage.setItem('accessToken', access_token);
       localStorage.setItem('tokenType', token_type);
       localStorage.setItem('expiresIn', expires_in);
+
+      // Keeping track of when token expires
+      // Converted expires at time from seconds to milliseconds
+      const tokenExpiresAt = Date.now() + parseInt(expires_in) * 1000;
+      localStorage.setItem('tokenExpiresAt', tokenExpiresAt);
     }
   }, [])
 
@@ -59,7 +64,8 @@ const WebApp = () => {
     </div>
   ) : (
     <div>
-      <h1 className='displayApp'>Loading user data...</h1>
+      <div></div>
+      <h1 className='displayAppLoading'>Loading user data...</h1>
     </div>
   )
 }

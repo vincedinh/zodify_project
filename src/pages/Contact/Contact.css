@@ -1,0 +1,31 @@
+.displayContact {
+  display: flex;
+  flex-direction: column; /* Stack the child elements vertically */
+  justify-content: center; /* Center the child elements horizontally */
+  align-items: center; /* Center the child elements vertically */
+  margin-top: 10vmin; /* or any other fixed pixel value, to be optimized for mobile */
+  margin-bottom: 10vmin;
+}
+
+.displayContact a {
+  text-decoration: none;
+  color: rgba(205,102,69,1);
+}
+
+.displayContact h1 {
+  text-align: center;
+  padding-left: 20vmin;
+  padding-right: 20vmin;
+}
+
+.displayContact h3 {
+  text-align: center;
+  padding-left: 20vmin;
+  padding-right: 20vmin;
+}
+
+.displayContact p {
+  text-align: center;
+  padding-left: 20vmin;
+  padding-right: 20vmin;
+}

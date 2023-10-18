@@ -3,7 +3,7 @@
   width: 100%;
   background: black;
   opacity: 0.75;
-  color: white;
+  color: #F8F0E3;
   
   /* fix the navbar to the top */
   position: fixed;
@@ -13,6 +13,6 @@
 .NavigationBar li {
   display: inline-block;
   margin-right: 10px;
-  color: white;
+  color: #F8F0E3;
   font-weight: bold;
 }

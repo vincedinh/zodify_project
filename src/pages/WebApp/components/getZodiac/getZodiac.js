@@ -197,7 +197,7 @@ const GetZodiac = () => {
   
     generatedZodiac = (
       <div>
-        <h1>Your music's zodiac animal is: {topZodiac}</h1>
+        <h1>Your music's zodiac animal this month is: {topZodiac}</h1>
         <img src={ZODIAC_IMG[topZodiac]} alt={topZodiac} />
         <h2>{DisplayTraits(zodiacDscrpMap[topZodiac][0])}</h2>
         <h3>{zodiacDscrpMap[topZodiac][1]}</h3>

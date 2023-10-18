@@ -5,7 +5,7 @@ import "./Hero.css";
 import * as SPOTIFY from "../../constants/spotify";
 
 const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
+const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/"
 const SCOPES = ["user-read-private", "user-read-email", "user-top-read"];
 
 const getReturnedParamsFromSpotifyAuth = (hash) => {
@@ -25,6 +25,9 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 }
 
 const Hero = () => {
+  // const auth = useAuth();
+
+  // Store Spotify access token for login session
   useEffect(() => {
     if(window.location.hash) {
       const {
@@ -37,11 +40,13 @@ const Hero = () => {
       localStorage.setItem('accessToken', access_token);
       localStorage.setItem('tokenType', token_type);
       localStorage.setItem('expiresIn', expires_in);
-      console.log(localStorage.getItem('accessToken'))
+
+      // Keeping track of when token expires
+      // Converted expires at time from seconds to milliseconds
+      const tokenExpiresAt = Date.now() + parseInt(expires_in) * 1000;
+      localStorage.setItem('tokenExpiresAt', tokenExpiresAt);
     }
   }, [])
-
-  // const auth = useAuth();
 
   var url = 'https://accounts.spotify.com/authorize';
   url += '?response_type=token';
@@ -51,15 +56,16 @@ const Hero = () => {
   // url += '&state=' + encodeURIComponent(auth.user);
 
   const handleLogin = () => {
-    console.log(localStorage.getItem('accessToken'))
     window.location = url;
   };
+  
 
   return (
     <div className="Hero">
         <h1>Zodify</h1>
         <p>Find your music's spirit animal.</p>
         <button onClick={handleLogin}>Spotify Login</button>
+        <p>Once logged in, click on the "App" tab to access the Zodify web app.</p>
     </div>
   )
 }

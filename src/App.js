@@ -17,6 +17,9 @@ import Login from './components/Login/Login';
 import PrivateRoute from './components/privateRoute';
 import { useAuth } from './context/AuthContext';
 import Footer from './components/Footer';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
 
 function App() {
   // const {isLoading} = useAuth();
@@ -28,13 +31,13 @@ function App() {
     <Router>
       <NavigationBar/>
       <Routes>
-        {/* <Route path={ROUTES.SIGN_UP} element={<SignUp/>}/> */}
-        {/* <Route path={ROUTES.LOGIN} element={<Login/>}/> */}
-        {/* <Route path={ROUTES.WEB_APP} element={<PrivateRoute/>}> */}
-          <Route path={ROUTES.WEB_APP} element={<WebApp/>}/>
-        {/* </Route> */}
         <Route path={ROUTES.HOME} element={<Hero/>}/>
-        {/* <Route path={ROUTES.PROFILE} element={<h1>Welcome!</h1>}/>       */}
+        <Route path={ROUTES.WEB_APP} element={<PrivateRoute/>}>
+          <Route path={ROUTES.WEB_APP} element={<WebApp/>}/>
+        </Route>
+        <Route path={ROUTES.ABOUT} element={<About/>}/>
+        <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy/>}/>
+        <Route path={ROUTES.CONTACT} element={<Contact/>}/>
         </Routes>
         <Footer/>
     </Router>

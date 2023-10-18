@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 import './NavigationBar.css';
 import * as ROUTES from '../../constants/routes.js'
-import { useAuth } from '../../context/AuthContext';
+// import { useAuth } from '../../context/AuthContext';
 
 const NavigationBar = () => {
-  const auth = useAuth();
+  // const auth = useAuth();
   return (
     <header className='NavigationBar'>
       <nav>
@@ -15,7 +15,7 @@ const NavigationBar = () => {
             <li>Home</li>
           </Link>
           { /** App tab is only accessible to those logged into Spotify/have a token */
-            localStorage.getItem('accessToken') ? (
+            localStorage.getItem('accessToken') && Date.now() <= localStorage.getItem('tokenExpiresAt') ? (
               <Link to={ROUTES.WEB_APP}>
                 <li>App</li>
               </Link>
@@ -23,6 +23,15 @@ const NavigationBar = () => {
               <></>
             )
           }
+          <Link to={ROUTES.ABOUT}>
+            <li>About</li>
+          </Link>
+          <Link to={ROUTES.PRIVACY_POLICY}>
+            <li>Privacy Policy</li>
+          </Link>
+          <Link to={ROUTES.CONTACT}>
+            <li>Contact</li>
+          </Link>
           {/* { auth.user ? (
             <>
             <Link to={ROUTES.WEB_APP}>
