@@ -6,8 +6,14 @@
   margin-top: 10vmin; /* or any other fixed pixel value, to be optimized for mobile */
   margin-bottom: 10vmin;
 }
+
 .displayPrivacyPolicy p {
   text-align: center;
   padding-left: 20vmin;
   padding-right: 20vmin;
+}
+
+.displayAbout a {
+  text-decoration: none;
+  color: rgba(205,102,69,1);
 }
