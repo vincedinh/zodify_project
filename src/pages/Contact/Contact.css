@@ -9,23 +9,17 @@
 
 .displayContact a {
   text-decoration: none;
-  color: rgba(205,102,69,1);
+  color: #CD6645;
 }
 
 .displayContact h1 {
   text-align: center;
-  padding-left: 20vmin;
-  padding-right: 20vmin;
 }
 
 .displayContact h3 {
   text-align: center;
-  padding-left: 20vmin;
-  padding-right: 20vmin;
 }
 
 .displayContact p {
   text-align: center;
-  padding-left: 20vmin;
-  padding-right: 20vmin;
 }

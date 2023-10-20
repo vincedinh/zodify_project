@@ -6,8 +6,9 @@
   width: 100%;
   background: #282b2d;
   color: #F8F0E3;
-  position: sticky;
+  position: relative;
   bottom: 0;
+  padding-top: 10px;
 }
 
 .Footer p {

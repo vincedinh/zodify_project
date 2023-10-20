@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
+import { Button } from "react-bootstrap";
+
 import "./Hero.css";
 
 // import { useAuth } from "../../context/AuthContext";
 import * as SPOTIFY from "../../constants/spotify";
+import ZodiacScroller from "../ZodiacScroller/ZodiacScroller";
 
 const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
@@ -62,10 +65,13 @@ const Hero = () => {
 
   return (
     <div className="Hero">
+      <div className='HeroText'>
         <h1>Zodify</h1>
         <p>Find your music's spirit animal.</p>
-        <button onClick={handleLogin}>Spotify Login</button>
-        <p style={{fontStyle: 'italic'}}>*Click the login button to access the app.*</p>
+        <Button size="lg" className='SpotifyButton' variant='success' onClick={handleLogin}>Spotify Login</Button>
+        <p style={{fontStyle: 'italic', paddingTop: '15px'}}>*Click the login button to access the app.*</p>
+      </div>
+      <ZodiacScroller/>
     </div>
   )
 }

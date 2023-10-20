@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import * as ROUTES from './constants/routes';
 /** FIREBASE AUTH DISABLED FOR NOW */
@@ -12,23 +13,15 @@ import * as ROUTES from './constants/routes';
 import WebApp from './pages/WebApp'
 import Hero from './components/Hero/index.js';
 import NavigationBar from './components/NavigationBar/index.js';
-import SignUp from './components/SignUp/SignUp';
-import Login from './components/Login/Login';
-import PrivateRoute from './components/privateRoute';
-import { useAuth } from './context/AuthContext';
 import Footer from './components/Footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 
 function App() {
-  // const {isLoading} = useAuth();
-
-  // return isLoading ? (
-    // <h1>Loading data...</h1>
-  // ): 
   return (
     <Router>
+      {/* <NavigationBar/> */}
       <NavigationBar/>
       <Routes>
         <Route path={ROUTES.HOME} element={<Hero/>}/>

@@ -1,52 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import {
+  Nav,
+  Navbar,
+  Container
+} from 'react-bootstrap/';
 
 import './NavigationBar.css';
 import * as ROUTES from '../../constants/routes.js'
-// import { useAuth } from '../../context/AuthContext';
 
 const NavigationBar = () => {
   // const auth = useAuth();
   return (
-    <header className='NavigationBar'>
-      <nav>
-        <ul>
-          <Link to={ROUTES.HOME}>
-            <li>Home</li>
-          </Link>
-          <Link to={ROUTES.ABOUT}>
-            <li>About</li>
-          </Link>
-          <Link to={ROUTES.PRIVACY_POLICY}>
-            <li>Privacy Policy</li>
-          </Link>
-          <Link to={ROUTES.CONTACT}>
-            <li>Contact</li>
-          </Link>
-          {/* { auth.user ? (
-            <>
-            <Link to={ROUTES.WEB_APP}>
-              <li>App</li>
-            </Link>
-            <Link to={ROUTES.PROFILE}>
-              <li>Profile</li>
-            </Link>
-            <li onClick={() => auth.logout()}>Logout</li>
-            </>
-            ) : (
-              <>
-                <Link to={ROUTES.LOGIN}>
-                  <li>Login</li>
-                </Link>
-                <Link to={ROUTES.SIGN_UP}>
-                  <li>Sign Up</li>
-                </Link>
-              </>
-            )
-          } */}
-        </ul>
-      </nav>
-    </header>
+    <Navbar expand="lg" variant="dark" className="NavigationBar">
+        <Navbar.Brand href={ROUTES.HOME} className='custom-brand-color'>Zodify</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='custom-toggle-color' />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href={ROUTES.ABOUT} className='custom-text-color'>About</Nav.Link>
+            <Nav.Link href={ROUTES.PRIVACY_POLICY} className='custom-text-color'>Privacy Policy</Nav.Link>
+            <Nav.Link href={ROUTES.CONTACT} className='custom-text-color'>Contact</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+    </Navbar>
   )
 };
 

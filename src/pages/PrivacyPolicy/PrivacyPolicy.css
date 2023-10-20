@@ -7,13 +7,15 @@
   margin-bottom: 10vmin;
 }
 
+.displayPrivacyPolicy h1 {
+  text-align: center;
+}
+
 .displayPrivacyPolicy p {
   text-align: center;
-  padding-left: 20vmin;
-  padding-right: 20vmin;
 }
 
 .displayPrivacyPolicy a {
   text-decoration: none;
-  color: rgba(205,102,69,1);
+  color: #CD6645;
 }

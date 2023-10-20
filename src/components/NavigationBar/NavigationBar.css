@@ -1,18 +1,22 @@
+/* 
+$primary-color: #CD6645;
+$secondary-color: #F8F0E3;
+$background-color: #282b2d; 
+*/
+
 .NavigationBar {
-  display: block;
+  padding-left: 20px;
   width: 100%;
-  background: black;
-  opacity: 0.75;
-  color: #F8F0E3;
-  
-  /* fix the navbar to the top */
-  position: fixed;
+  background: #282b2d;
+  position: relative;
   top: 0;
+  z-index: 2;
 }
 
-.NavigationBar li {
-  display: inline-block;
-  margin-right: 10px;
+.custom-brand-color {
+  color: #CD6645;
+}
+
+.custom-text-color {
   color: #F8F0E3;
-  font-weight: bold;
 }

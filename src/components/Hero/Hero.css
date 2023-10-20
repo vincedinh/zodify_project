@@ -8,6 +8,20 @@
     rgba(0,212,255,1) 100%);
   height: 100vh;
   width: 100%;
-  padding: 20% 20%;
   color: #F8F0E3;
+}
+
+.HeroText {
+  padding-top: 20%;
+  padding-left: 20%;
+  position: relative;
+}
+
+.SpotifyButton {
+  background-color: #1DB954; 
+  outline: none;
+}
+
+.SpotifyButton:hover, .SpotifyButton:active, SpotifyButton:focus {
+  background-color: #0f5e2b;
 }
