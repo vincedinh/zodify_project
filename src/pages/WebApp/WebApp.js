@@ -1,4 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import { 
+  Container,
+  Row, 
+  Col,
+} from "react-bootstrap";
+
 import './WebApp.css';
 import useSpotifyData from "./components/spotifyData/spotifyData";
 import GetZodiac from "./components/getZodiac/index.js";
@@ -20,10 +26,6 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 }
 
 const WebApp = () => {
-
-  // Old firebase login
-  // const auth = useAuth();
-
   // Store Spotify access token for login session
   useEffect(() => {
     if(window.location.hash) {
@@ -58,15 +60,20 @@ const WebApp = () => {
   }, [token, handleGetUser])
 
   return !loading ? (
-    <div className='displayApp'>
-      <h1>Hello, {userDetails.display_name}!</h1>
-      <GetZodiac/>
-    </div>
+    <Container fluid className='displayApp'>
+      <Row>
+        <h1>Hello, {userDetails.display_name}!</h1>
+      </Row>
+      <Row>
+        <Col>
+          <GetZodiac/>
+        </Col>
+      </Row>
+    </Container>
   ) : (
-    <div>
-      <div></div>
+    <Container>
       <h1 className='displayAppLoading'>Loading user data...</h1>
-    </div>
+    </Container>
   )
 }
 

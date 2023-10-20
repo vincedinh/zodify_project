@@ -64,11 +64,11 @@ const Hero = () => {
   
 
   return (
-    <div className="Hero">
-      <div className='HeroText'>
+    <div className="hero">
+      <div className='heroText'>
         <h1>Zodify</h1>
         <p>Find your music's spirit animal.</p>
-        <Button size="lg" className='SpotifyButton' variant='success' onClick={handleLogin}>Spotify Login</Button>
+        <Button size="lg" className='spotifyButton' onClick={handleLogin}>Spotify Login</Button>
         <p style={{fontStyle: 'italic', paddingTop: '15px'}}>*Click the login button to access the app.*</p>
       </div>
       <ZodiacScroller/>

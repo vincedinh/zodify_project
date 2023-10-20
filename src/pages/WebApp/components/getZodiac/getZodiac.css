@@ -1,0 +1,27 @@
+.zodiacImg {
+  max-width: 100vmin;
+  max-height: 100vmin;
+}
+
+.highlightText {
+  color: #CD6645;
+}
+
+.generatedZodiac {
+  display: flex;
+  flex-direction: column; /* Stack the child elements vertically */
+  justify-content: center; /* Center the child elements horizontally */
+  align-items: center; /* Center the child elements vertically */
+  text-align: center;
+}
+
+.analyzeButton {
+  margin-bottom: 10px;
+  background-color: #CD6645;
+  border-color: #CD6645;
+}
+
+.analyzeButton:hover {
+  background-color: #85402A;
+  border-color: #85402A;
+}

@@ -5,6 +5,16 @@ import React,
   useRef,
 }
 from 'react';
+
+import { 
+  Container,
+  Row, 
+  Col,
+  Button,
+} from "react-bootstrap";
+
+import './getZodiac.css'
+
 import useFetch from '../../../../utils/hooks'
 import useSpotifyData from '../spotifyData/index.js';
 import { ZODIAC_IMG } from '../../../../constants/images.js';
@@ -196,9 +206,18 @@ const GetZodiac = () => {
     }
   
     generatedZodiac = (
-      <div>
-        <h1>Your music's zodiac animal this month is: {topZodiac}</h1>
-        <img src={ZODIAC_IMG[topZodiac]} alt={topZodiac} />
+      <Container className='generatedZodiac'>
+        <Row>
+          <Col>
+            Your music's zodiac animal this month is: <br/>
+            <h1 className='highlightText'> The {topZodiac}</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <img src={ZODIAC_IMG[topZodiac]} alt={topZodiac} className='zodiacImg' />
+          </Col>
+        </Row>
         <h2>{DisplayTraits(zodiacDscrpMap[topZodiac][0])}</h2>
         <h3>{zodiacDscrpMap[topZodiac][1]}</h3>
         <div>
@@ -207,7 +226,7 @@ const GetZodiac = () => {
         <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black'}}>
           {listGenres(keysInDescendingOrder)}
         </div>
-      </div>
+      </Container>
     );
   }
   
@@ -217,12 +236,19 @@ const GetZodiac = () => {
   }
 
   return (
-    <div>
-      {/* <DisplayZodiacCounts zodiacCountMap={zodiacCountMap}/> */}
-      <button onClick={handleProcessGenres}>Analyze Your Music!</button>
-      {generatedZodiac}
-      <p>*Disclaimer: these connections are symbolic and meant for creative interpretation rather than a direct astrological association.*</p>
-    </div>
+<Container fluid>
+    <Row>
+      <Col xs={12}>
+        <Button className='analyzeButton' onClick={handleProcessGenres}>Analyze Your Music!</Button>
+        {generatedZodiac}
+        <div className="disclaimer">
+          <p>
+            *Disclaimer: these connections are symbolic and meant for creative interpretation rather than a direct astrological association.*
+          </p>
+        </div>
+      </Col>
+    </Row>
+  </Container>
   );
 };
 

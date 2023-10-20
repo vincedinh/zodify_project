@@ -14,7 +14,7 @@ const NavigationBar = () => {
   return (
     <Navbar expand="lg" variant="dark" className="NavigationBar">
         <Navbar.Brand href={ROUTES.HOME} className='custom-brand-color'>Zodify</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className='custom-toggle-color' />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='custom-toggle' />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href={ROUTES.ABOUT} className='custom-text-color'>About</Nav.Link>

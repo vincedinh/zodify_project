@@ -1,4 +1,4 @@
-.Hero {
+.hero {
   display: block;
   background: rgb(205,102,69);
   background: linear-gradient(
@@ -11,17 +11,18 @@
   color: #F8F0E3;
 }
 
-.HeroText {
+.heroText {
   padding-top: 20%;
   padding-left: 20%;
   position: relative;
 }
 
-.SpotifyButton {
+.spotifyButton {
   background-color: #1DB954; 
-  outline: none;
+  border-color: #1DB954; 
 }
 
-.SpotifyButton:hover, .SpotifyButton:active, SpotifyButton:focus {
+.spotifyButton:hover, .spotifyButton:active, .spotifyButton:focus {
   background-color: #0f5e2b;
+  border-color: #0f5e2b;
 }

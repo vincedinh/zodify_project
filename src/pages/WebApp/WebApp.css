@@ -13,7 +13,7 @@
   flex-direction: column; /* Stack the child elements vertically */
   justify-content: center; /* Center the child elements horizontally */
   align-items: center; /* Center the child elements vertically */
-  margin-top: 20vmin; /* or any other fixed pixel value, to be optimized for mobile */
+  margin-top: 10vmin; /* or any other fixed pixel value, to be optimized for mobile */
   margin-bottom: 10vmin;
 }
 
