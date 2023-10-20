@@ -18,11 +18,11 @@
 }
 
 .spotifyButton {
-  background-color: #1DB954; 
-  border-color: #1DB954; 
+  background-color: #1DB954 !important;
+  border-color: #1DB954 !important;
 }
 
 .spotifyButton:hover, .spotifyButton:active, .spotifyButton:focus {
-  background-color: #0f5e2b;
-  border-color: #0f5e2b;
+  background-color: #0f5e2b !important;
+  border-color: #0f5e2b !important;
 }

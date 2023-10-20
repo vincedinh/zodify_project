@@ -48,3 +48,7 @@
 .displayApp ul {
   list-style: none;
 }
+
+.spinner {
+  color: #CD6645;
+}

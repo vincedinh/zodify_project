@@ -11,6 +11,8 @@ import {
   Row, 
   Col,
   Button,
+  Tabs,
+  Tab,
 } from "react-bootstrap";
 
 import './getZodiac.css'
@@ -167,6 +169,9 @@ const GetZodiac = () => {
     }
   };
 
+  // For mobile view
+  const [key, setKey] = useState('description');
+
   // Generate zodiac if genres have been processed
   if (processingDone) {
       // Convert the Map to an array of key-value pairs
@@ -218,14 +223,54 @@ const GetZodiac = () => {
             <img src={ZODIAC_IMG[topZodiac]} alt={topZodiac} className='zodiacImg' />
           </Col>
         </Row>
-        <h2>{DisplayTraits(zodiacDscrpMap[topZodiac][0])}</h2>
-        <h3>{zodiacDscrpMap[topZodiac][1]}</h3>
-        <div>
-          Your top genres this month:
-        </div>
-        <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black'}}>
-          {listGenres(keysInDescendingOrder)}
-        </div>
+        <Row>
+          <Col>
+            <h2>{DisplayTraits(zodiacDscrpMap[topZodiac][0])}</h2>
+          </Col>
+        </Row>
+
+        {/**  Desktop View */}
+        <Row className='d-none d-lg-block'>
+          <Col>
+            <h3>{zodiacDscrpMap[topZodiac][1]}</h3>
+          </Col>
+        </Row>
+        <Row className='d-none d-lg-block'> 
+          <Col>
+            <div>
+              Your top genres this month:
+            </div>
+            <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black'}}>
+              {listGenres(keysInDescendingOrder)}
+            </div>
+          </Col>
+        </Row>
+
+        {/** Mobile view */}
+        <Row className='d-lg-none'>
+          <Tabs
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+            fill
+          >
+            <Tab eventKey="description" title="Description" tabClassName='mobileTab'>
+              <p className='mobileTabContent'>{zodiacDscrpMap[topZodiac][1]}</p>
+            </Tab>
+            <Tab eventKey="genres" title="Genres" tabClassName='mobileTab'>
+              <div className='mobileTabContent'>
+                Your top genres this month:
+              </div>
+              <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black'}}>
+                {listGenres(keysInDescendingOrder)}
+              </div>
+            </Tab>
+            <Tab eventKey="share" title="Share" tabClassName='mobileTab'>
+              <p className='mobileTabContent'>
+                Share your results with your friends by screenshotting or your link above!
+              </p>
+            </Tab>
+          </Tabs>
+        </Row>
       </Container>
     );
   }

@@ -3,6 +3,7 @@ import {
   Container,
   Row, 
   Col,
+  Spinner,
 } from "react-bootstrap";
 
 import './WebApp.css';
@@ -71,8 +72,13 @@ const WebApp = () => {
       </Row>
     </Container>
   ) : (
-    <Container>
-      <h1 className='displayAppLoading'>Loading user data...</h1>
+    <Container fluid className='displayApp'>
+      <Row>
+        <Col>
+          <Spinner animation='border' className='spinner'/>
+          <h1 className='displayAppLoading'>Loading user data...</h1>
+        </Col>
+      </Row>
     </Container>
   )
 }

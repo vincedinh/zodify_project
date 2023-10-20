@@ -17,11 +17,27 @@
 
 .analyzeButton {
   margin-bottom: 10px;
-  background-color: #CD6645;
-  border-color: #CD6645;
+  background-color: #CD6645 !important;
+  border-color: #CD6645 !important;
 }
 
-.analyzeButton:hover {
-  background-color: #85402A;
-  border-color: #85402A;
+.analyzeButton:hover, .analyzeButton:active, .analyzeButton:focus {
+  background-color: #85402A !important;
+  border-color: #85402A !important;
+}
+
+/** 
+  https://stackoverflow.com/questions/54865818/how-to-customize-backgronud-and-color-of-tabs
+  changing color of tabs
+*/
+.mobileTab {
+  color: black;
+}
+
+.nav-link.active {
+  color: #CD6645 !important;
+}
+
+.mobileTabContent {
+  padding-top: 20px;
 }
