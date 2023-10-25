@@ -7,10 +7,13 @@ Tech Stack:
 Node.js
   * node-postgres are used to retrieve data from the AWS RDS database in the backend
   * Axios (promise based HTTP client for browser and Node.js) used to call on the Spotify API
+
 Express.js
   * Used to build REST API for Zodiac data
+
 React.js
   * Used to build UI and front-end (such as implementing contexts)
+  
 Bootstrap
   * react-bootstrap used for RWD (making mobile view look clean)
 
