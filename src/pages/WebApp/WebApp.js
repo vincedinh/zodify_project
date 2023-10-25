@@ -1,4 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { 
+  useEffect, 
+  useRef, 
+} from "react";
+
 import { 
   Container,
   Row, 
@@ -7,6 +11,7 @@ import {
 } from "react-bootstrap";
 
 import './WebApp.css';
+import { UserContext } from "../../context/UserContext";
 import useSpotifyData from "./components/spotifyData/spotifyData";
 import GetZodiac from "./components/getZodiac/index.js";
 
@@ -36,15 +41,15 @@ const WebApp = () => {
         token_type,
       } = getReturnedParamsFromSpotifyAuth(window.location.hash)
 
-      localStorage.clear();
-      localStorage.setItem('accessToken', access_token);
-      localStorage.setItem('tokenType', token_type);
-      localStorage.setItem('expiresIn', expires_in);
+      sessionStorage.clear();
+      sessionStorage.setItem('accessToken', access_token);
+      sessionStorage.setItem('tokenType', token_type);
+      sessionStorage.setItem('expiresIn', expires_in);
 
       // Keeping track of when token expires
       // Converted expires at time from seconds to milliseconds
       const tokenExpiresAt = Date.now() + parseInt(expires_in) * 1000;
-      localStorage.setItem('tokenExpiresAt', tokenExpiresAt);
+      sessionStorage.setItem('tokenExpiresAt', tokenExpiresAt);
     }
   }, [])
 
@@ -61,16 +66,18 @@ const WebApp = () => {
   }, [token, handleGetUser])
 
   return !loading ? (
-    <Container fluid className='displayApp'>
-      <Row>
-        <h1>Hello, {userDetails.display_name}!</h1>
-      </Row>
-      <Row>
-        <Col>
-          <GetZodiac/>
-        </Col>
-      </Row>
-    </Container>
+    <UserContext.Provider value={userDetails}>
+      <Container fluid className='displayApp'>
+        <Row>
+          <h1>Hello, {userDetails.display_name}!</h1>
+        </Row>
+        <Row>
+          <Col>
+            <GetZodiac/>
+          </Col>
+        </Row>
+      </Container>
+    </UserContext.Provider>
   ) : (
     <Container fluid className='displayApp'>
       <Row>

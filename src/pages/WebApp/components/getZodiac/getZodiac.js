@@ -3,6 +3,7 @@ import React,
   useState,
   useEffect,
   useRef,
+  useContext
 }
 from 'react';
 
@@ -13,13 +14,16 @@ import {
   Button,
   Tabs,
   Tab,
-} from "react-bootstrap";
+  Card,
+  Image,
+} from 'react-bootstrap';
 
 import './getZodiac.css'
 
 import useFetch from '../../../../utils/hooks'
 import useSpotifyData from '../spotifyData/index.js';
 import { ZODIAC_IMG } from '../../../../constants/images.js';
+import { UserContext } from '../../../../context/UserContext';
 
 /**
  * 
@@ -48,11 +52,11 @@ function getZodiacWithMaxValue(data) {
     }
   }
 
-  // There is a matching Zodiac present, else return the user "Unicorn" status
+  // There is a matching Zodiac present, else return the user 'Unicorn' status
   if (maxValue !== 0) {
     return maxKey;
   } else {
-    return "Unicorn";
+    return 'Unicorn';
   }
   
 }
@@ -105,6 +109,8 @@ function DisplayZodiacCounts({ zodiacCountMap }) {
  * @returns displays user zodiac based off of genres listened to
  */
 const GetZodiac = () => {
+  const userDetails = useContext(UserContext);
+
   // fetches list of zodiacs and associated genres
   const { data, handleGetTopArtists, token } = useSpotifyData();
 
@@ -174,7 +180,7 @@ const GetZodiac = () => {
 
   // Generate zodiac if genres have been processed
   if (processingDone) {
-      // Convert the Map to an array of key-value pairs
+    // Convert the Map to an array of key-value pairs
     // Sort the array in descending order based on values
     // Extract and print the keys in descending order
     const genresArray = [...(data.topGenres || new Map()).entries()];
@@ -184,11 +190,26 @@ const GetZodiac = () => {
     function listGenres(genres) {
       if (genres) {
         return (
-          <ul>
+          <div className='listGenres'>
             {genres.map((genre, index) => (
               <li key={index}>{genre}</li>
             ))}
-          </ul>
+          </div>
+        );
+      }
+      return null;
+    }
+
+    // Shorter list for the mobile view card element
+    function listTop3Genres(genres) {
+      if (genres) {
+        const top3Genres = genres.slice(0, 3);
+        return (
+          <div className='listGenres'>
+            {top3Genres.map((genre, index) => (
+              <li key={index}>{genre}</li>
+            ))}
+          </div>
         );
       }
       return null;
@@ -209,13 +230,16 @@ const GetZodiac = () => {
         </div>
       );
     }
+
+    const today = new Date();
+    const formattedToday = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`;
   
     generatedZodiac = (
       <Container className='generatedZodiac'>
         <Row>
           <Col>
             Your music's zodiac animal this month is: <br/>
-            <h1 className='highlightText'> The {topZodiac}</h1>
+            <h1 className='zodiacCardImageText'> The {topZodiac}</h1>
           </Col>
         </Row>
         <Row>
@@ -240,7 +264,7 @@ const GetZodiac = () => {
             <div>
               Your top genres this month:
             </div>
-            <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black'}}>
+            <div style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'black', justifyContent: 'center'}}>
               {listGenres(keysInDescendingOrder)}
             </div>
           </Col>
@@ -253,10 +277,10 @@ const GetZodiac = () => {
             onSelect={(k) => setKey(k)}
             fill
           >
-            <Tab eventKey="description" title="Description" tabClassName='mobileTab'>
+            <Tab eventKey='description' title='Description' tabClassName='mobileTab'>
               <p className='mobileTabContent'>{zodiacDscrpMap[topZodiac][1]}</p>
             </Tab>
-            <Tab eventKey="genres" title="Genres" tabClassName='mobileTab'>
+            <Tab eventKey='genres' title='Genres' tabClassName='mobileTab'>
               <div className='mobileTabContent'>
                 Your top genres this month:
               </div>
@@ -264,10 +288,38 @@ const GetZodiac = () => {
                 {listGenres(keysInDescendingOrder)}
               </div>
             </Tab>
-            <Tab eventKey="share" title="Share" tabClassName='mobileTab'>
+            <Tab eventKey='share' title='Share' tabClassName='mobileTab'>
               <p className='mobileTabContent'>
-                Share your results with your friends by screenshotting or your link above!
+                <Image src={userDetails.images[0].url} roundedCircle width={200}/>
+                Screenshot & share your zodiac card with friends below!
               </p>
+              <Card className='zodiacCard'>
+                <div className='zodiacCardHeading'>
+                  <Card.Title className='zodiacCardTitle'>
+                      <div>
+                        <span className='highlightText'>{userDetails.display_name}'s </span> 
+                        Music Zodiac
+                      </div>
+                  </Card.Title>
+                  <Card.Subtitle className='zodiacCardSubtitle mb-2'>
+                    {formattedToday}
+                  </Card.Subtitle>
+                  <div className='zodiacCardImageBody'>
+                    <Card.Title className='zodiacCardImageText' style={{paddingTop: '10px'}}>Dragon</Card.Title>
+                    <Card.Img src={ZODIAC_IMG[topZodiac]} className='zodiacCardImage' variant='top'/>
+                    <Card.Subtitle className='zodiacCardTraitText pt-2 pb-2'>Traits: {DisplayTraits(zodiacDscrpMap[topZodiac][0])} </Card.Subtitle>
+                  </div>
+                  <Card.Body>
+                    <div>
+                      Some of my aligned genres were: {listTop3Genres(keysInDescendingOrder)} <br/>
+
+                      Sound right to you?
+                      Get yours on <a href='https://www.zodify.github.io' className='highlightText'>zodify.github.io</a>!
+                    </div>
+
+                  </Card.Body>
+                </div>
+              </Card>
             </Tab>
           </Tabs>
         </Row>
@@ -281,19 +333,19 @@ const GetZodiac = () => {
   }
 
   return (
-<Container fluid>
-    <Row>
-      <Col xs={12}>
-        <Button className='analyzeButton' onClick={handleProcessGenres}>Analyze Your Music!</Button>
-        {generatedZodiac}
-        <div className="disclaimer">
-          <p>
-            *Disclaimer: these connections are symbolic and meant for creative interpretation rather than a direct astrological association.*
-          </p>
-        </div>
-      </Col>
-    </Row>
-  </Container>
+    <Container fluid>
+      <Row>
+        <Col xs={12}>
+          <Button className='analyzeButton' onClick={handleProcessGenres}>Analyze Your Music!</Button>
+          {generatedZodiac}
+          <div className='disclaimer'>
+            <p>
+              *Disclaimer: these connections are symbolic and meant for creative interpretation rather than a direct astrological association.*
+            </p>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

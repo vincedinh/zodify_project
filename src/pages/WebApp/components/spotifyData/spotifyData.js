@@ -93,6 +93,7 @@ const useSpotifyData = () => {
         .then(async (res) => {
           const userDetails = res.data;
           setUserDetails(userDetails);
+          sessionStorage.setItem('userDetails', JSON.stringify(userDetails));
         })
         .catch((error) => {
           // const retryHeader = error.response.headers['retry-after'];
@@ -108,8 +109,8 @@ const useSpotifyData = () => {
 
   // Runs once with no dependencies (on render)
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
-      setToken(localStorage.getItem('accessToken'));
+    if (sessionStorage.getItem('accessToken')) {
+      setToken(sessionStorage.getItem('accessToken'));
       setLoading(false);
     }
   }, []);
