@@ -31,6 +31,8 @@ replace.txt
 
 # firebase
 /src/firebase
+/backend/api/firebase/creds.txt
+/backend/api/firebase/credentials.json
 
 # packages
 package-lock.json
