@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 import * as ROUTES from '../constants/routes'
 
@@ -18,7 +19,7 @@ function useFetch(relativeUrl) {
       const res = await fetch(fullUrl, {
         //use the authorization
         headers: {
-          authorization: 'Bearer ' + sessionStorage.getItem('@token'),
+          authorization: 'Bearer ' + Cookies.get('sessionToken')
         },
       })
 

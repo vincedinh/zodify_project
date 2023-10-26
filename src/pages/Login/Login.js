@@ -68,7 +68,7 @@ const SignUp = () => {
                 </div>
                 <div className="d-grid">
                   <Button type="submit" className="submitButton">
-                    Sign Up
+                    Submit
                   </Button>
                 </div>
                 <p className="forgot-password text-right">

@@ -1,7 +1,7 @@
 // Thank you to Carmelle Codes on Youtube; this code was modified from her tutorials!
 
 import React, { useState, useEffect, useContext, createContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import { 
   getAuth, 
@@ -33,7 +33,8 @@ function useProvideAuth() {
   
       const token = await userCredential.user.getIdToken();
       if (token) {
-        sessionStorage.setItem("@token", token);
+        // Omitting expire prop makes this a session cookie
+        Cookies.set('sessionToken', token, {expires: 5, secure: true });
       }
   
       callback();

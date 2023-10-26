@@ -93,7 +93,6 @@ const useSpotifyData = () => {
         .then(async (res) => {
           const userDetails = res.data;
           setUserDetails(userDetails);
-          sessionStorage.setItem('userDetails', JSON.stringify(userDetails));
         })
         .catch((error) => {
           // const retryHeader = error.response.headers['retry-after'];
