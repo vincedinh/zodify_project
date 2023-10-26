@@ -41,7 +41,7 @@ const WebApp = () => {
         token_type,
       } = getReturnedParamsFromSpotifyAuth(window.location.hash)
 
-      sessionStorage.clear();
+      // sessionStorage.clear();
       sessionStorage.setItem('accessToken', access_token);
       sessionStorage.setItem('tokenType', token_type);
       sessionStorage.setItem('expiresIn', expires_in);

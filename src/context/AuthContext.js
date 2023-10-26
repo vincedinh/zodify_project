@@ -1,4 +1,4 @@
-// Thank you to Carmelle Codes on Youtube for this!
+// Thank you to Carmelle Codes on Youtube; this code was modified from her tutorials!
 
 import React, { useState, useEffect, useContext, createContext } from 'react';
 // import { useNavigate } from 'react-router-dom';
@@ -33,7 +33,7 @@ function useProvideAuth() {
   
       const token = await userCredential.user.getIdToken();
       if (token) {
-        localStorage.setItem("@token", token);
+        sessionStorage.setItem("@token", token);
       }
   
       callback();

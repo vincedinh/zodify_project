@@ -39,19 +39,19 @@ const Hero = () => {
         token_type,
       } = getReturnedParamsFromSpotifyAuth(window.location.hash)
 
-      localStorage.clear();
-      localStorage.setItem('accessToken', access_token);
-      localStorage.setItem('tokenType', token_type);
-      localStorage.setItem('expiresIn', expires_in);
+      // sessionStorage.clear();
+      sessionStorage.setItem('accessToken', access_token);
+      sessionStorage.setItem('tokenType', token_type);
+      sessionStorage.setItem('expiresIn', expires_in);
 
       // Keeping track of when token expires
       // Converted expires at time from seconds to milliseconds
       const tokenExpiresAt = Date.now() + parseInt(expires_in) * 1000;
-      localStorage.setItem('tokenExpiresAt', tokenExpiresAt);
+      sessionStorage.setItem('tokenExpiresAt', tokenExpiresAt);
     }
   }, [])
 
-  var url = 'https://accounts.spotify.com/authorize';
+  let url = 'https://accounts.spotify.com/authorize';
   url += '?response_type=token';
   url += '&client_id=' + encodeURIComponent(CLIENT_ID);
   url += '&scope=' + encodeURIComponent(SCOPES);

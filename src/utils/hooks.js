@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+
+import * as ROUTES from '../constants/routes'
 
 function useFetch(relativeUrl) {
   const [data, setData] = useState([]);
+  let nav = useNavigate();
 
   async function fetchUrl() {
     try {
@@ -14,9 +18,10 @@ function useFetch(relativeUrl) {
       const res = await fetch(fullUrl, {
         //use the authorization
         headers: {
-          authorization: 'Bearer ' + localStorage.getItem('@token'),
+          authorization: 'Bearer ' + sessionStorage.getItem('@token'),
         },
       })
+
       /** FOR DEV TESTING
        * FROM: https://support.stripe.com/questions/how-to-fix-syntaxerror-unexpected-token-in-json-at-position-0#:~:text=Usually%20this%20error%20is%20caused,the%20error%20messages%20mentioned%20above.
        */
@@ -33,10 +38,20 @@ function useFetch(relativeUrl) {
       //         console.log('Received the following instead of valid JSON:', bodyText);
       //     });
       // });
-      const json = await res.json();
-      setData(json);
+
+      if (res.status === 403) {
+        // Handle 403 error here
+        console.error('User is not authorized (403 error)');
+        nav(ROUTES.LOGIN);
+      } else if (res.ok) {
+        const json = await res.json();
+        setData(json);
+      }
+
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('An internal error has occured. Try again later or login again.');
+      // console.log(error);
+      // console.error('Error fetching data:', error);
     }
   }
 
