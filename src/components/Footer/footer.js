@@ -11,23 +11,26 @@ const Footer = () => {
         Made by{' '}
         <a href="https://www.github.com/vincedinh">Vince Dinh</a>
       </p>
-      <ul>
+      <p style={{fontStyle: 'italic'}}>
+        This app is optimized for mobile platforms.
+      </p>
+      <div>
         <Link to={ROUTES.HOME}>
-          <li>Home</li>
-        </Link>
-        <div className='Divider'>|</div>
-        <Link to={ROUTES.ABOUT}>
-          <li>About</li>
-        </Link>
-        <div className='Divider'>|</div>
-        <Link to={ROUTES.PRIVACY_POLICY}>
-          <li>Privacy Policy</li>
-        </Link>
-        <div className='Divider'>|</div>
-        <Link to={ROUTES.CONTACT}>
-          <li>Contact</li>
-        </Link>
-      </ul>
+            <li>Home</li>
+          </Link>
+          <div className='Divider'>|</div>
+          <Link to={ROUTES.ABOUT}>
+            <li>About</li>
+          </Link>
+          <div className='Divider'>|</div>
+          <Link to={ROUTES.PRIVACY_POLICY}>
+            <li>Privacy Policy</li>
+          </Link>
+          <div className='Divider'>|</div>
+          <Link to={ROUTES.CONTACT}>
+            <li>Contact</li>
+          </Link>
+      </div>
     </div>
   )
 }

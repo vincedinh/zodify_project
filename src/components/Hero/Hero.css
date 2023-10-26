@@ -26,3 +26,17 @@
   background-color: #0f5e2b !important;
   border-color: #0f5e2b !important;
 }
+
+.loginButton {
+  background-color: #CD6645 !important;
+  border-color: #CD6645 !important;
+}
+
+.loginButton:hover, .loginButton:active, .loginButton:focus {
+  background-color: #85402A !important;
+  border-color: #85402A !important;
+}
+
+.highlightTextLogin {
+  color: #CD6645;
+}

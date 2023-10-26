@@ -69,7 +69,7 @@ const WebApp = () => {
     <SpotifyUserContext.Provider value={userDetails}>
       <Container fluid className='displayApp'>
         <Row>
-          <h1>Hello, {userDetails.display_name}!</h1>
+          <h1>Hello, {userDetails.display_name}.</h1>
         </Row>
         <Row>
           <Col>

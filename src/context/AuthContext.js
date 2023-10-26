@@ -61,6 +61,7 @@ function useProvideAuth() {
   const logout = () => {
     return signOut(firebaseAuth)
       .then(() => {
+        Cookies.remove('sessionToken');
         setUser(false);
       })
       .catch((error) => 
