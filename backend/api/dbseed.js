@@ -17,22 +17,6 @@ const pool = new Pool({
   ssl,
 });
 
-// const connectDb = async () => {
-//     try {
- 
-//         await pool.connect()
-//         const res = await pool.query('SELECT animalid, unnest(genres) as genre FROM zodiac')
-//         for (const row of res.rows) {
-//           console.log(`animal: ${row.animalid}, Genre: ${row.genre}`);
-//         }
-//         await pool.end()
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
- 
-// connectDb()
-
 // get all zodiacs
 exports.selectZodiacs = async () => {
   const select = `SELECT * FROM zodiac`;
@@ -41,12 +25,8 @@ exports.selectZodiacs = async () => {
     text: select,
     values: [],
   };
-  // console.log(await pool.query(query));
+
   const {rows} = await pool.query(query);
-  // console.log(rows);
-  // for (const row of rows) {
-  //   console.log(`animal: ${row.animalid}, Genre: ${row.genre}`);
-  // }
 
   return rows;
 };
