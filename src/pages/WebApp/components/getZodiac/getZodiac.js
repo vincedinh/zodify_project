@@ -128,7 +128,7 @@ const GetZodiac = () => {
   // Fetch zodiac relations
   // Fix: Currently runs with every render, find way to only run on initial render
   let [zodiacData] = useFetch(
-    'http://localhost:9000/api/getList'
+    ':9000/api/getList'
   );
 
   // Type is plain object

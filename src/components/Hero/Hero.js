@@ -8,7 +8,7 @@ import * as SPOTIFY from "../../constants/spotify";
 import ZodiacScroller from "../ZodiacScroller/ZodiacScroller";
 
 const CLIENT_ID = SPOTIFY.SPOTIFY_CLIENT_ID
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/webapp"
+const REDIRECT_URL_AFTER_LOGIN = `${window.location.origin}/webapp`
 const SCOPES = ["user-read-private", "user-read-email", "user-top-read"];
 
 const getReturnedParamsFromSpotifyAuth = (hash) => {

@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 
-function useFetch(url) {
+function useFetch(relativeUrl) {
   const [data, setData] = useState([]);
 
   async function fetchUrl() {
-    const res = await fetch(url);
-    const json = await res.json();
+    try {
+      // Get the current domain (protocol + hostname)
+      const currentDomain = window.location.protocol + '//' + window.location.hostname;
+      // Construct the full URL by appending the relative URL to the current domain
+      const fullUrl = `${currentDomain}${relativeUrl}`;
 
-    setData(json);
+      const res = await fetch(fullUrl);
+      const json = await res.json();
+
+      setData(json);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
 
   useEffect(() => {

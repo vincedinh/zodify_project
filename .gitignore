@@ -41,3 +41,6 @@ package-lock.json
 # postgres
 /backend/config
 /backend/us-west-1-bundle.pem
+
+# docker
+Dockerfile
