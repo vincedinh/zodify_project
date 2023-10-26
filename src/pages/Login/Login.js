@@ -9,7 +9,6 @@ import {
 } from 'react-bootstrap';
 
 import { useAuth } from "../../context/AuthContext"
-import { FirebaseContext } from "../../context/FirebaseContext";
 
 import * as ROUTES from '../../constants/routes';
 

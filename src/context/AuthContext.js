@@ -26,18 +26,22 @@ function useProvideAuth() {
   const [user, setUser] = useState(null);
   const firebaseAuth = getAuth();
 
-  const login = ({email, password, callback}) => {
-    return signInWithEmailAndPassword(firebaseAuth, email, password)
-    .then((userCredential) => {
+  const login = async ({email, password, callback}) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
       setUser(userCredential.user);
+  
+      const token = await userCredential.user.getIdToken();
+      if (token) {
+        localStorage.setItem("@token", token);
+      }
+  
       callback();
-    })
-    .catch((error) => 
-    {
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorCode + ": " + errorMessage);
-    });
+    }
   };
 
   const signup = ({email, password}) => {

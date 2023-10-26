@@ -10,9 +10,30 @@ function useFetch(relativeUrl) {
       // Construct the full URL by appending the relative URL to the current domain
       const fullUrl = `${currentDomain}${relativeUrl}`;
 
-      const res = await fetch(fullUrl);
+      // let resClone;
+      const res = await fetch(fullUrl, {
+        //use the authorization
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('@token'),
+        },
+      })
+      /** FOR DEV TESTING
+       * FROM: https://support.stripe.com/questions/how-to-fix-syntaxerror-unexpected-token-in-json-at-position-0#:~:text=Usually%20this%20error%20is%20caused,the%20error%20messages%20mentioned%20above.
+       */
+      // .then(function (response) {
+      //   resClone = response.clone();
+      //   return response.json();
+      // })
+      // .then(function (data) {
+      //   // Do something with data
+      // }, function (rejectionReason) {
+      //     console.log('Error parsing JSON from response:', rejectionReason, resClone);
+      //     resClone.text()
+      //     .then(function (bodyText) {
+      //         console.log('Received the following instead of valid JSON:', bodyText);
+      //     });
+      // });
       const json = await res.json();
-
       setData(json);
     } catch (error) {
       console.error('Error fetching data:', error);

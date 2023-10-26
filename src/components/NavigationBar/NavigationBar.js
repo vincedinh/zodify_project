@@ -1,15 +1,16 @@
 import React from 'react';
-
 import {
   Nav,
   Navbar,
 } from 'react-bootstrap/';
 
+import { useAuth } from '../../context/AuthContext';
+
 import './NavigationBar.css';
 import * as ROUTES from '../../constants/routes.js'
 
 const NavigationBar = () => {
-  // const auth = useAuth();
+  const auth = useAuth();
   return (
     <Navbar expand="lg" variant="dark" className="NavigationBar">
         <Navbar.Brand href={ROUTES.HOME} className='custom-brand-color'>Zodify</Navbar.Brand>
