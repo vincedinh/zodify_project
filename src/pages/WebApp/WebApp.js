@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 
 import './WebApp.css';
-import { UserContext } from "../../context/UserContext";
+import { SpotifyUserContext } from "../../context/SpotifyUserContext";
 import useSpotifyData from "./components/spotifyData/spotifyData";
 import GetZodiac from "./components/getZodiac/index.js";
 
@@ -66,7 +66,7 @@ const WebApp = () => {
   }, [token, handleGetUser])
 
   return !loading ? (
-    <UserContext.Provider value={userDetails}>
+    <SpotifyUserContext.Provider value={userDetails}>
       <Container fluid className='displayApp'>
         <Row>
           <h1>Hello, {userDetails.display_name}!</h1>
@@ -77,7 +77,7 @@ const WebApp = () => {
           </Col>
         </Row>
       </Container>
-    </UserContext.Provider>
+    </SpotifyUserContext.Provider>
   ) : (
     <Container fluid className='displayApp'>
       <Row>

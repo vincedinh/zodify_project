@@ -1,0 +1,39 @@
+.displaySignUp {
+  padding: 10vmin 0 10vmin 0;
+  background: #F8F0E3;
+}
+
+.highlightText {
+  text-decoration: none;
+  color: #CD6645;
+}
+
+.Card {
+  width: 18rem;
+  margin: 0 auto;
+  flex-direction: column; /* Stack the child elements vertically */
+  justify-content: center; /* Center the child elements horizontally */
+  align-items: center; /* Center the child elements vertically */
+
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.zodiacCardTitle {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0 10px
+}
+
+.submitButton {
+  margin-bottom: 10px;
+  background-color: #CD6645 !important;
+  border-color: #CD6645 !important;
+}
+
+.submitButton:hover, .submitButton:active, .submitButton:focus {
+  background-color: #85402A !important;
+  border-color: #85402A !important;
+}

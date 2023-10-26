@@ -1,6 +1,6 @@
 import React, {createContext, useState, useEffect } from 'react';
 
-export const UserContext = createContext();
+export const SpotifyUserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
   const [userDetails, setUserDetails] = useState(null);
@@ -20,8 +20,8 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={userDetails}>
+    <SpotifyUserContext.Provider value={userDetails}>
       {children}
-    </UserContext.Provider>
+    </SpotifyUserContext.Provider>
   )
 };

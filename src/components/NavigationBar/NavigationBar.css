@@ -13,6 +13,10 @@ $background-color: #282b2d;
   z-index: 2;
 }
 
+.auth {
+  font-weight: bold;
+}
+
 .custom-toggle {
   margin-right: 20px;
 }

@@ -23,7 +23,7 @@ import './getZodiac.css'
 import useFetch from '../../../../utils/hooks'
 import useSpotifyData from '../spotifyData/index.js';
 import { ZODIAC_IMG } from '../../../../constants/images.js';
-import { UserContext } from '../../../../context/UserContext';
+import { SpotifyUserContext } from '../../../../context/SpotifyUserContext';
 
 /**
  * 
@@ -109,7 +109,7 @@ function DisplayZodiacCounts({ zodiacCountMap }) {
  * @returns displays user zodiac based off of genres listened to
  */
 const GetZodiac = () => {
-  const userDetails = useContext(UserContext);
+  const userDetails = useContext(SpotifyUserContext);
 
   // fetches list of zodiacs and associated genres
   const { data, handleGetTopArtists, token } = useSpotifyData();

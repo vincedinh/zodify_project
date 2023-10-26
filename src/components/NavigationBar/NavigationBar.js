@@ -16,6 +16,8 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className='custom-toggle' />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link href={ROUTES.SIGN_UP} className='auth custom-text-color'>Register</Nav.Link>
+            <Nav.Link href={ROUTES.LOGIN} className='auth custom-text-color'>Login</Nav.Link>
             <Nav.Link href={ROUTES.ABOUT} className='custom-text-color'>About</Nav.Link>
             <Nav.Link href={ROUTES.PRIVACY_POLICY} className='custom-text-color'>Privacy Policy</Nav.Link>
             <Nav.Link href={ROUTES.CONTACT} className='custom-text-color'>Contact</Nav.Link>
