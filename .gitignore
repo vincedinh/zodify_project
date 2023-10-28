@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/.env
 
 # backend dependencies
 /backend/api/node_modules
@@ -13,6 +14,7 @@
 /coverage
 
 # production
+zodify-ssh.pem
 /build
 
 # misc
