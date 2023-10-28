@@ -15,6 +15,7 @@
 
 # production
 zodify-ssh.pem
+npm-scripts.json
 /build
 
 # misc
