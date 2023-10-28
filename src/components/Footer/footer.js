@@ -14,7 +14,7 @@ const Footer = () => {
       <p style={{fontStyle: 'italic'}}>
         This app is optimized for mobile platforms.
       </p>
-      <div>
+      <div style={{paddingBottom: '10px'}}>
         <Link to={ROUTES.HOME}>
             <li>Home</li>
           </Link>

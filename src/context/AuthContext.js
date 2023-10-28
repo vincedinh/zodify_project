@@ -1,4 +1,5 @@
 // Thank you to Carmelle Codes on Youtube; this code was modified from her tutorials!
+// Firebase disabled for now //
 
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import Cookies from 'js-cookie';

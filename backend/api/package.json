@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "containerize-dev": "docker image build -t zodify-backend:zodify-backend . ",
-    "run-dev-container": "docker run -dp 127.0.0.1:9000:9000 zodify-backend:zodify-backend",
+    "run-dev-container": "docker run -dp 127.0.0.1:9000:9000 zodify-backend:zodify-backend"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

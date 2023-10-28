@@ -1,3 +1,5 @@
+// Firebase disabled for now //
+
 const firebase = require("./firebase/index.js");
 
 // Checks Firebase token from user login

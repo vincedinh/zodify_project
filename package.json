@@ -27,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "containerize-dev": "docker image build -t zodify-frontend:zodify-frontend . ",
-    "run-dev-container": "docker run -dp 127.0.0.1:3000:3000 zodify-frontend:zodify-frontend",
+    "run-dev-container": "docker run -dp 127.0.0.1:3000:3000 zodify-frontend:zodify-frontend"
   },
   "eslintConfig": {
     "extends": [

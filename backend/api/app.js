@@ -27,13 +27,14 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // middleware for allowing react to fetch() from server (since it is on different port)
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, OPTIONS');
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, OPTIONS');
+//   next();
+// });
 
+// List zodiacs
 app.get('/api/getList', async (req, res) => {
   try {
     const zodiacs = await db.selectZodiacs();

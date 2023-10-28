@@ -16,8 +16,8 @@ import Footer from './components/Footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
-import SignUp from './pages/SignUp/SignUp';
-import Login from './pages/Login/Login';
+// import SignUp from './pages/SignUp/SignUp';
+// import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -25,8 +25,8 @@ function App() {
       <NavigationBar/>
       <Routes>
         <Route path={ROUTES.HOME} element={<Hero/>}/>
-        <Route path={ROUTES.SIGN_UP} element={<SignUp/>}/>
-        <Route path={ROUTES.LOGIN} element={<Login/>}/>
+        {/* <Route path={ROUTES.SIGN_UP} element={<SignUp/>}/>
+        <Route path={ROUTES.LOGIN} element={<Login/>}/> */}
         <Route path={ROUTES.WEB_APP} element={<WebApp/>}/>
         <Route path={ROUTES.ABOUT} element={<About/>}/>
         <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicy/>}/>
