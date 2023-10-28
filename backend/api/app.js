@@ -12,7 +12,6 @@ const app = express();
 app.use(cors());
 
 const db = require('./dbseed.js');
-const auth = require('./authmiddleware.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', auth.authMiddleware, indexRouter);
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // middleware for allowing react to fetch() from server (since it is on different port)

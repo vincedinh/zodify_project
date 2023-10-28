@@ -34,7 +34,10 @@ function useProvideAuth() {
       const token = await userCredential.user.getIdToken();
       if (token) {
         // Omitting expire prop makes this a session cookie
-        Cookies.set('sessionToken', token, {expires: 5, secure: true });
+        // Omitting secure prop makes this susceptible to data transfer over http (https not needed)
+        const currentDomain = window.location.protocol + '//' + window.location.hostname;
+        console.log(token);
+        Cookies.set('sessionToken', token, {path: '/', expires: 5});
       }
   
       callback();
