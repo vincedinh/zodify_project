@@ -19,6 +19,8 @@ Bootstrap
 
 Formerly supported authentication through Google Firebase, though code is disabled for now (since there is no real purpose for it but may add more features in the future), solely relying on Spotify auth.
 
+The app was deployed on an AWS EC2 instance using Docker to containerize the backend and Nginx as a reverse proxy for the frontend.
+
 Royalty-free zodiac animal images obtained from FreePik.
 
 This project was inspired by Receiptify by Michelle Liu and some of the initial code was based on CarmelleCodes' React JS series on Youtube.
