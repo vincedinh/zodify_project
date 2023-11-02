@@ -26,7 +26,7 @@ const About = () => {
           <div>
             <h3>Why is the app not working?</h3>
             <p>You may need to first log into the Spotify App by clicking the Spotify Login button on the home screen and allow permissions. <br/>
-              If it is still not working, then try refreshing the page.
+              If it is still not working, then try refreshing the page. The app also only currently supports users who have listened within the past month!
             </p>
           </div>
           <div>
