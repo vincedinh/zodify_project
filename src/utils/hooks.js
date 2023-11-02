@@ -4,9 +4,13 @@ function useFetch(url) {
   const [data, setData] = useState([]);
 
   async function fetchUrl() {
-    const res = await fetch(url);
-    const json = await res.json();
-    setData(json);
+    try {
+      const res = await fetch(url);
+      const json = await res.json();
+      setData(json);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
 
   useEffect(() => {

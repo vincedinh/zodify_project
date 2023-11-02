@@ -127,9 +127,11 @@ const GetZodiac = () => {
 
   // Fetch zodiac relations
   // Fix: Currently runs with every render, find way to only run on initial render
-  let [zodiacData] = useFetch(
-    'http://localhost:9000/api/getList'
-  );
+  let [zodiacData] = useFetch('https://zodify-app.com/api/getList');
+    // 'http://zodify-backend:9000/api/getList'
+    // 'http://172.17.0.2:9000/api/getList'
+    // 'http://127.0.0.1:9000/api/getList'
+    // 'http://localhost:9000/api/getList' 
 
   // Type is plain object
   const zodiacGenreMap = zodiacData.reduce((acc, item) => {
@@ -305,7 +307,7 @@ const GetZodiac = () => {
                     {formattedToday}
                   </Card.Subtitle>
                   <div className='zodiacCardImageBody'>
-                    <Card.Title className='zodiacCardImageText' style={{paddingTop: '10px'}}>Dragon</Card.Title>
+                    <Card.Title className='zodiacCardImageText' style={{paddingTop: '10px'}}>{topZodiac}</Card.Title>
                     <Card.Img src={ZODIAC_IMG[topZodiac]} className='zodiacCardImage' variant='top'/>
                     <Card.Subtitle className='zodiacCardTraitText pt-2 pb-2'>Traits: {DisplayTraits(zodiacDscrpMap[topZodiac][0])} </Card.Subtitle>
                   </div>
@@ -314,7 +316,7 @@ const GetZodiac = () => {
                       Some of my aligned genres were: {listTop3Genres(keysInDescendingOrder)} <br/>
 
                       Sound right to you?
-                      Get yours on <a href='https://www.zodify.github.io' className='highlightText'>zodify.github.io</a>!
+                      Get yours on <a href='www.zodify-app.com' className='highlightText'>zodify-app.com</a>!
                     </div>
 
                   </Card.Body>

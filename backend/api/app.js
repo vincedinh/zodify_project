@@ -9,7 +9,11 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  origin: ['https://www.zodify-app.com', 'https://zodify-app.com'],
+};
+app.use(cors(corsOptions));
 
 const db = require('./dbseed.js');
 
@@ -25,14 +29,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// middleware for allowing react to fetch() from server (since it is on different port)
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, OPTIONS');
-//   next();
-// });
 
 // List zodiacs
 app.get('/api/getList', async (req, res) => {
