@@ -316,7 +316,7 @@ const GetZodiac = () => {
                       Some of my aligned genres were: {listTop3Genres(keysInDescendingOrder)} <br/>
 
                       Sound right to you?
-                      Get yours on <a href='www.zodify-app.com' className='highlightText'>zodify-app.com</a>!
+                      Get yours on <a href='/' className='highlightText'>https://zodify-app.com</a>!
                     </div>
 
                   </Card.Body>
