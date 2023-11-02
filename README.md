@@ -1,6 +1,6 @@
 # Zodify
 
-WIP React project using Spotify API to generate an animal from the Vietnamese zodiac based on user's top listened to genres. 
+React project using Spotify API to generate an animal from the Vietnamese zodiac based on user's top listened to genres. 
 
 Tech Stack:
 
@@ -24,3 +24,5 @@ The app was deployed on an AWS EC2 instance using Docker to containerize the bac
 Royalty-free zodiac animal images obtained from FreePik.
 
 This project was inspired by Receiptify by Michelle Liu and some of the initial code was based on CarmelleCodes' React JS series on Youtube.
+
+Let me know if you have questions via email: vincekhdinh@gmail.com!
