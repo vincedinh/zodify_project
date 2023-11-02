@@ -15,8 +15,12 @@
 
 # production
 zodify-ssh.pem
+/ssl
 npm-scripts.json
 /build
+ecr_credentials.csv
+packages.json
+/backend/package.json
 
 # misc
 .DS_Store
