@@ -292,7 +292,10 @@ const GetZodiac = () => {
             </Tab>
             <Tab eventKey='share' title='Share' tabClassName='mobileTab'>
               <p className='mobileTabContent'>
-                <Image src={userDetails.images[0].url} roundedCircle width={200}/>
+                { userDetails.images[0] ? 
+                (<Image src={userDetails.images[0].url} roundedCircle width={200} alt="Spotify profile image"/>) 
+                : (<Image roundedCircle width={200} alt="Spotify profile image (default)" className="gray-circle-placeholder"/>)
+                }
                 Screenshot & share your zodiac card with friends below!
               </p>
               <Card className='zodiacCard'>
@@ -308,7 +311,7 @@ const GetZodiac = () => {
                   </Card.Subtitle>
                   <div className='zodiacCardImageBody'>
                     <Card.Title className='zodiacCardImageText' style={{paddingTop: '10px'}}>{topZodiac}</Card.Title>
-                    <Card.Img src={ZODIAC_IMG[topZodiac]} className='zodiacCardImage' variant='top'/>
+                    <Card.Img src={ZODIAC_IMG[topZodiac]} className='zodiacCardImage' variant='top' alt={`Your zodiac is: ${ZODIAC_IMG[topZodiac]}`}/>
                     <Card.Subtitle className='zodiacCardTraitText pt-2 pb-2'>Traits: {DisplayTraits(zodiacDscrpMap[topZodiac][0])} </Card.Subtitle>
                   </div>
                   <Card.Body>

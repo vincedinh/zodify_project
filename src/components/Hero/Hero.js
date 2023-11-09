@@ -33,7 +33,9 @@ const Hero = () => {
         <p>Find your music's spirit animal.</p>
           <Button size="lg" className='spotifyButton' onClick={handleLogin}>Spotify Login</Button>
           <p style={{fontStyle: 'italic', paddingTop: '15px'}}>
-            *Login to Spotify to access the app.*
+            Note: This app is currently awaiting Extended Quota mode from Spotify API. <br/>
+            Request access <a href="/contact" className='highlightText'>here</a> for your Spotify account. <br/>
+            *If you have access, login to app using Spotify credentials only - (Google/Apple/Facebook not supported).*
           </p>
       </div>
       <ZodiacScroller/>
