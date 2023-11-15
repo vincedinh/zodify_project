@@ -1,6 +1,6 @@
 # Zodify
 
-React project using Spotify API to generate an animal from the Vietnamese zodiac based on user's top listened to genres. Client-side rendered.
+React project using Spotify API to generate an animal from the Vietnamese zodiac based on user's top listened to genres. Client-side rendered for the most part, while generation of zodiac based on data stored on server is server-side rendered through fetching data from Express endpoint. 
 
 Tech Stack:
 
