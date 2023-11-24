@@ -127,7 +127,8 @@ const GetZodiac = () => {
 
   // Fetch zodiac relations
   // Fix: Currently runs with every render, find way to only run on initial render
-  let [zodiacData] = useFetch('https://zodify-app.com/api/getList');
+  const apiUrl = window.location.origin + '/api/getList';
+  let [zodiacData] = useFetch(apiUrl);
     // 'http://zodify-backend:9000/api/getList'
     // 'http://172.17.0.2:9000/api/getList'
     // 'http://127.0.0.1:9000/api/getList'
